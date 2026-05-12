@@ -75,9 +75,11 @@ const handleLogin = async () => {
 
 <template>
     <div class="relative w-full min-h-screen overflow-hidden">
-        <div class="fixed top-0 left-0 w-full h-full bg-cover bg-center -z-20" :style="{ backgroundImage: `url(${Plane})` }" />
+        <div class="fixed top-0 left-0 w-full h-full bg-cover bg-center -z-20"
+            :style="{ backgroundImage: `url(${Plane})` }" />
         <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto min-h-screen">
-            <div class="w-full relative z-10 bg-white/50 rounded-lg shadow backdrop-blur-sm sm:max-w-md xl:p-0 dark:bg-gray-800/80 dark:border-gray-700">
+            <div
+                class="w-full relative z-10 bg-white/50 rounded-lg shadow backdrop-blur-sm sm:max-w-md xl:p-0 dark:bg-gray-800/80 dark:border-gray-700">
                 <div class="p-6 space-y-4 sm:p-8">
                     <div>
                         <img class="mx-auto w-48" :src="LargeLogo" alt="Logo" />
@@ -126,25 +128,32 @@ const handleLogin = async () => {
                             <button type="button" @click="togglePasswordVisibility"
                                 class="absolute cursor-pointer right-3 top-11 text-gray-500">
                                 <div v-if="showPassword" class="w-5 h-5">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye-icon lucide-eye"><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="lucide lucide-eye-icon lucide-eye">
+                                        <path
+                                            d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" />
+                                        <circle cx="12" cy="12" r="3" />
+                                    </svg>
                                 </div>
                                 <div v-else class="w-5 h-5">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye-off-icon lucide-eye-off"><path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49"/><path d="M14.084 14.158a3 3 0 0 1-4.242-4.242"/><path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143"/><path d="m2 2 20 20"/></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="lucide lucide-eye-off-icon lucide-eye-off">
+                                        <path
+                                            d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49" />
+                                        <path d="M14.084 14.158a3 3 0 0 1-4.242-4.242" />
+                                        <path
+                                            d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143" />
+                                        <path d="m2 2 20 20" />
+                                    </svg>
                                 </div>
                             </button>
 
                         </div>
                         <button type="submit" :disabled="loading"
                             class="w-full bg-green-700 hover:bg-green-800 transition text-white py-3 rounded-lg font-bold disabled:opacity-50">
-
-                            <span v-if="loading">
-                                Signing In...
-                            </span>
-
-                            <span v-else>
-                                Sign In
-                            </span>
-
+                            {{ loading ? 'Signing In...' : 'Sign In' }}
                         </button>
 
                     </form>
