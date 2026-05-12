@@ -1,14 +1,13 @@
 <script setup>
-import { SectorService } from '@/api/services/sector.service';
-import { onMounted, ref } from 'vue'
+import { SectorService } from '@/api/services/sector.service'
+import { onMounted, reactive, ref } from 'vue'
 import { useRoute } from 'vue-router'
-import { toast } from 'vue-sonner';
+import { toast } from 'vue-sonner'
 
-const route = useRoute();
-const sectorId = route.params.id;
+const route = useRoute()
 const loading = ref(false)
 
-const form = ref({
+const form = reactive({
     flightNo: '',
     leg: '',
     origin: '',
@@ -23,8 +22,9 @@ const fetchSingleSectors = async () => {
     loading.value = true
 
     try {
-        const response = await SectorService.GetSectorById(sectorId);
-        form.value = {
+        const response = await SectorService.GetSectorById(route.params.id)
+
+        Object.assign(form, {
             flightNo: response.flightNo,
             leg: response.leg,
             origin: response.origin,
@@ -33,7 +33,8 @@ const fetchSingleSectors = async () => {
             inter: response.inter,
             currency: response.currency,
             pairFlightNo: response.pairFlightNo
-        }
+        })
+
     } catch (error) {
         toast.error(error?.response?.data?.message || error.message)
     } finally {
@@ -42,21 +43,23 @@ const fetchSingleSectors = async () => {
 }
 
 onMounted(() => {
-    fetchSingleSectors();
+    fetchSingleSectors()
 })
 
-
 const updateSector = async () => {
+    loading.value = true
+
     try {
         const response = await SectorService.UpdateSectorByFlightNo(
-            form.value.flightNo,
-            form.value.leg,
-            form.value.origin,
-            form.value.destination,
-            form.value
+            form.flightNo,
+            form.leg,
+            form.origin,
+            form.destination,
+            form
         )
 
-        toast.success(response?.message)
+        toast.success(response?.message || 'Sector updated successfully')
+
     } catch (error) {
         toast.error(error?.response?.data?.message || error.message)
     } finally {
@@ -72,10 +75,12 @@ const updateSector = async () => {
             Update Sector
         </h1>
 
-        <div v-if="loading">
+        <!-- Loader -->
+        <div v-if="loading" class="py-10 text-center">
             Loading...
         </div>
 
+        <!-- Form -->
         <div v-else class="grid grid-cols-2 gap-4">
 
             <input v-model="form.flightNo" placeholder="Flight No" class="input" />
@@ -92,8 +97,9 @@ const updateSector = async () => {
 
         </div>
 
-        <button @click="updateSector" class="mt-6 bg-green-700 text-white px-4 py-2 rounded">
-            Update Sector
+        <button @click="updateSector"
+            class="mt-6 bg-green-700 text-white px-4 py-2 rounded hover:bg-green-800 transition" :disabled="loading">
+            {{ loading ? 'Updating...' : 'Update Sector' }}
         </button>
 
     </div>
