@@ -6,6 +6,7 @@ import FlightUpdationView from "@/views/FlightUpdationView.vue";
 import HomeView from "@/views/HomeView.vue";
 import LoginView from "@/views/LoginView.vue";
 import NotFoundView from "@/views/NotFoundView.vue";
+import SectorView from "@/views/SectorView.vue";
 import UnauthorizedView from "@/views/UnauthorizedView.vue";
 import { createRouter, createWebHistory } from "vue-router";
 
@@ -44,6 +45,13 @@ const router = createRouter({
     {
       path: "/check-flight",
       component: CheckFlightView,
+      meta: {
+        requiresAuth: true,
+      },
+    },
+    {
+      path: "/sector",
+      component: SectorView,
       meta: {
         requiresAuth: true,
       },
