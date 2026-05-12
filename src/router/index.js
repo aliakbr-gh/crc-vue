@@ -1,4 +1,5 @@
 import { useAuthStore } from "@/stores/auth";
+import AddSectorView from "@/views/AddSectorView.vue";
 import CheckFlightView from "@/views/CheckFlightView.vue";
 import DashboardView from "@/views/DashboardView.vue";
 import FlightUpdationFormView from "@/views/FlightUpdationFormView.vue";
@@ -53,6 +54,13 @@ const router = createRouter({
     {
       path: "/sector",
       component: SectorView,
+      meta: {
+        requiresAuth: true,
+      },
+    },
+    {
+      path: "/sector/add",
+      component: AddSectorView,
       meta: {
         requiresAuth: true,
       },
