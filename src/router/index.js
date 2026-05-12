@@ -8,6 +8,7 @@ import LoginView from "@/views/LoginView.vue";
 import NotFoundView from "@/views/NotFoundView.vue";
 import SectorView from "@/views/SectorView.vue";
 import UnauthorizedView from "@/views/UnauthorizedView.vue";
+import UpdateSectorView from "@/views/UpdateSectorView.vue";
 import { createRouter, createWebHistory } from "vue-router";
 
 const router = createRouter({
@@ -52,6 +53,13 @@ const router = createRouter({
     {
       path: "/sector",
       component: SectorView,
+      meta: {
+        requiresAuth: true,
+      },
+    },
+    {
+      path: "/sector/edit/:id",
+      component: UpdateSectorView,
       meta: {
         requiresAuth: true,
       },
